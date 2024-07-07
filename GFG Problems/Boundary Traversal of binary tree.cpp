@@ -5,65 +5,81 @@ struct Node
     Node* left, * right;
 }; */
 
-class Solution {
-    void leftBoundary(Node *root, vector <int> &ans){
-        if(root == NULL) return;
-        
-        if(root->left == NULL && root->right == NULL){
+class Solution
+{
+    void leftBoundary(Node *root, vector<int> &ans)
+    {
+        if (root == NULL)
+            return;
+
+        if (root->left == NULL && root->right == NULL)
+        {
             return;
         }
-        
+
         ans.push_back(root->data);
-        if(root->left){
+        if (root->left)
+        {
             leftBoundary(root->left, ans);
         }
-        else{
+        else
+        {
             leftBoundary(root->right, ans);
         }
     }
-    
-    void leafBoundary(Node *root, vector <int> &ans){
-        if(root == NULL) return;
-        
-        if(root->left == NULL && root->right == NULL){
+
+    void leafBoundary(Node *root, vector<int> &ans)
+    {
+        if (root == NULL)
+            return;
+
+        if (root->left == NULL && root->right == NULL)
+        {
             ans.push_back(root->data);
             return;
         }
-        
+
         leafBoundary(root->left, ans);
         leafBoundary(root->right, ans);
     }
-    
-    void rightBoundary(Node *root, vector <int> &ans){
-        if(root == NULL) return;
-        
-        if(root->left == NULL && root->right == NULL){
+
+    void rightBoundary(Node *root, vector<int> &ans)
+    {
+        if (root == NULL)
+            return;
+
+        if (root->left == NULL && root->right == NULL)
+        {
             return;
         }
-        
-        if(root->right){
+
+        if (root->right)
+        {
             rightBoundary(root->right, ans);
         }
-        else{
+        else
+        {
             rightBoundary(root->left, ans);
         }
+        // kyoki peeche se print karana h isliye wapas jaaate time push kar rhe h, kyoki right boundary, boundary traversal me piche se print hota h
         ans.push_back(root->data);
     }
+
 public:
-    vector <int> boundary(Node *root)
+    vector<int> boundary(Node *root)
     {
-        //Your code here
-        vector <int> ans;
-    
+        // Your code here
+        vector<int> ans;
+
         ans.push_back(root->data);
-        
+
         leftBoundary(root->left, ans);
-        
+
         leafBoundary(root->left, ans);
         leafBoundary(root->right, ans);
-        
+
         rightBoundary(root->right, ans);
-        
+
         return ans;
     }
 };
